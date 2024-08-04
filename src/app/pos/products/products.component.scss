@@ -1,0 +1,23 @@
+.products-container {
+    padding: 1rem;
+
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+
+        .card-title {
+            padding-left: 0.5rem;
+        }
+
+        .card-info {
+            .price {
+                padding-left: 0.5rem;
+            }
+        }
+    }
+}
+
+.mat-mdc-card-header {
+    padding: 8px;
+}

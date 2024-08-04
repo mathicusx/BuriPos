@@ -1,0 +1,76 @@
+<div class="sale-terminal-container">
+  <div class="sale-terminal-products">
+    <table mat-table [dataSource]="products" class="mat-elevation-z8">
+      <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Описание</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Цена</th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}лв.</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>К-во.</th>
+        <td mat-cell *matCellDef="let element">1</td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef>Общо</th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}лв.</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div class="sale-terminal-total-summary">
+      <div class="summary-total">За Плащане: 250лв.</div>
+      <div class="summary-payment">В Брой: 300лв.</div>
+      <div class="summary-balance">Ресто: 50лв.</div>
+    </div>
+    <div class="sale-terminal-button-container">
+      <button mat-flat-button class="point-of-sale-button">Плащане</button>
+      <div class="sale-terminal-button" *ngFor="let number of numbers">
+        {{ number }}
+      </div>
+    </div>
+  </div>
+  <div class="terminal-options">
+    <div class="terminal-categories-container">
+      <div class="terminal-categories-header">
+        <mat-form-field
+          appearance="fill"
+          [hideRequiredMarker]="true"
+          [formGroup]="filterForm"
+        >
+          <mat-label>Търсене...</mat-label>
+          <mat-icon matIconPrefix>search</mat-icon>
+          <input matInput type="text" formControlName="search" />
+          <button
+            *ngIf="filterForm.get('search')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div
+        class="terminal-categories-content"
+        *ngFor="let category of categories"
+      >
+        <div class="category-text">{{ category.name }}</div>
+      </div>
+    </div>
+  </div>
+</div>
