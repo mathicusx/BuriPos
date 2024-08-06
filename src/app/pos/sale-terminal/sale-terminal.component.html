@@ -1,4 +1,4 @@
-<div class="sale-terminal-container">
+<div class="sale-terminal-container" (window:keypress)="handleBarcodeInput($event)"  autofocus>
   <div class="sale-terminal-products">
     <div class="sale-terminal-table">
       <table mat-table [dataSource]="products" class="mat-elevation-z8">

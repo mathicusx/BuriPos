@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import {
   groceryCategories,
   GroceryCategory,
@@ -40,7 +40,55 @@ export class SaleTerminalComponent {
   filterForm: FormGroup = new FormGroup({
     search: new FormControl(null),
   });
-  constructor() {
-    console.log(this.products);
+
+  private lastKeyPressTime: number = 0;
+  private keypressThreshold: number = 50;
+  private barcodeData: string = '';
+  private timeDiffArray: number[] = [];
+  private captureFirstKey: string = '';
+  private capturedFirstKey: boolean = false;
+
+  constructor() {}
+
+  handleBarcodeInput(event: KeyboardEvent): void {
+    const currentTime = new Date().getTime();
+
+    // Calculate time difference between keypresses
+    const timeDiff = currentTime - this.lastKeyPressTime;
+
+    // Update last keypress time
+    this.lastKeyPressTime = currentTime;
+
+    if (timeDiff > 300 && !this.capturedFirstKey) {
+      this.captureFirstKey = event.key;
+      this.capturedFirstKey = true;
+    }
+    this.timeDiffArray.push(timeDiff);
+    if (timeDiff < this.keypressThreshold) {
+      // Treat as scanner input
+      this.barcodeData += event.key;
+      console.log('barcode scanner');
+      // Assuming scanner sends data followed by Enter key
+      if (event.key === 'Enter') {
+        // Process the barcode data
+        const cleanedData = this.barcodeData.replace(/Enter$/, '');
+        this.processBarcode(cleanedData);
+        this.barcodeData = ''; // Reset after processing
+        this.captureFirstKey = '';
+        this.capturedFirstKey = false
+        this.timeDiffArray = [];
+      }
+    } else {
+      // Treat as keyboard input (e.g., for typing)
+      // Optionally handle keyboard input differently
+      // this.barcodeData = '';
+      console.log('Keyboard typing detected');
+    }
+  }
+
+  processBarcode(data: string): void {
+    console.log('Scanned Barcode:', this.captureFirstKey + data);
+    console.log(this.timeDiffArray);
+    // Add any additional processing logic here
   }
 }
