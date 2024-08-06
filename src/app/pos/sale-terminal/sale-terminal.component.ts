@@ -4,6 +4,8 @@ import {
   GroceryCategory,
   Product,
   products,
+  saleButtonOptions,
+  SaleButtonOptions,
 } from '../products/products';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
@@ -23,7 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './sale-terminal.component.html',
   styleUrl: './sale-terminal.component.scss',
@@ -33,12 +35,12 @@ export class SaleTerminalComponent {
   displayedColumns: string[] = ['name', 'price', 'quantity', 'total'];
   numbers: number[] = [];
   categories: GroceryCategory[] = groceryCategories;
+  saleButtonOptions: SaleButtonOptions[] = saleButtonOptions;
 
   filterForm: FormGroup = new FormGroup({
     search: new FormControl(null),
   });
   constructor() {
     console.log(this.products);
-    this.numbers = Array.from({ length: 9 }, (_, i) => i + 1);
   }
 }
