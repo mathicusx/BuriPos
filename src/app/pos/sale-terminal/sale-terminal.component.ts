@@ -1,14 +1,15 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import {
   groceryCategories,
   GroceryCategory,
   Product,
+  ProductForSale,
   products,
   saleButtonOptions,
   SaleButtonOptions,
 } from '../products/products';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,11 +32,18 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './sale-terminal.component.scss',
 })
 export class SaleTerminalComponent {
+  @ViewChild(MatTable) table!: MatTable<Product>;
+
   products: Product[] = products;
+  productsForSale: ProductForSale[] = [];
+  searchProducts: Product[] = [];
   displayedColumns: string[] = ['name', 'price', 'quantity', 'total'];
   numbers: number[] = [];
   categories: GroceryCategory[] = groceryCategories;
   saleButtonOptions: SaleButtonOptions[] = saleButtonOptions;
+  dataSource = [...products];
+  totalPrice: number = 0;
+  categorySelected: boolean = false;
 
   filterForm: FormGroup = new FormGroup({
     search: new FormControl(null),
@@ -75,7 +83,7 @@ export class SaleTerminalComponent {
         this.processBarcode(cleanedData);
         this.barcodeData = ''; // Reset after processing
         this.captureFirstKey = '';
-        this.capturedFirstKey = false
+        this.capturedFirstKey = false;
         this.timeDiffArray = [];
       }
     } else {
@@ -86,9 +94,39 @@ export class SaleTerminalComponent {
     }
   }
 
-  processBarcode(data: string): void {
-    console.log('Scanned Barcode:', this.captureFirstKey + data);
+  processBarcode(barcode: string): void {
+    console.log('Scanned Barcode:', this.captureFirstKey + barcode);
+    const capturedBarcode = this.captureFirstKey + barcode;
     console.log(this.timeDiffArray);
-    // Add any additional processing logic here
+    const searchByBarcode = this.products.find(
+      (e) => e.barcode === capturedBarcode
+    );
+    if (searchByBarcode) {
+      this.productsForSale.push({
+        barcode: searchByBarcode.barcode,
+        name: searchByBarcode.name,
+        price: searchByBarcode.price,
+        quantity: 1,
+      });
+      const totalPrice = this.productsForSale.reduce(
+        (acc, product) => acc + product.price,
+        0
+      );
+      this.totalPrice = totalPrice;
+    }
+    this.table.renderRows();
+  }
+
+  selectCategory(category: string) {
+    console.log(category);
+    this.categorySelected = true;
+    this.searchProducts = this.products.filter(
+      (product) => product.category === category
+    );
+  }
+
+  clearCategory() {
+    this.categorySelected = false;
+    this.searchProducts = [];
   }
 }

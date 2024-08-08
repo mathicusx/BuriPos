@@ -1,6 +1,6 @@
 .sale-terminal-container {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 1rem;
   gap: 0.5rem;
 
@@ -8,10 +8,15 @@
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px -4px rgb(0 0 0 / 0.1);
 
-    grid-column: span 2 / span 2;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
+    .empty-cart {
+      width: 100%;
+      text-align: center;
+      height: 300px;
+      align-content: center;
+    }
     table {
       border: 1px solid #eded;
       border-radius: 1rem;
@@ -20,31 +25,43 @@
   }
 
   .sale-terminal-total-summary {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: flex;
+    flex-direction: row-reverse;
+    justify-items: center;
+    align-items: center;
+
     gap: 0.5rem;
     color: white;
     background: darkslategray;
-    padding: 1.5rem;
-    justify-items: center;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
     font-size: 22px;
+
+    .summary-total {
+      flex: 1;
+    }
+    button {
+      border-radius: 0;
+      flex: 1;
+    }
   }
 
   .sale-terminal-button-container {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.5rem;
+    margin: 0 0.5rem;
 
     .sale-terminal-button {
       // border: 1px solid;
       text-align: center;
       button {
-        font-size: 40px;
+        font-size: 30px;
         background: darkslategray;
         color: white;
         border-radius: 0;
         width: 100%;
-        height: 80px;
+        height: 50px;
       }
     }
   }
@@ -83,11 +100,15 @@
         }
 
         .category-text {
+          width: 100%;
+          height: 50px;
+          padding: 1rem;
+          margin: 0;
+          border-radius: 0;
+
           background: darkslategray;
           text-align: center;
           color: white;
-          padding: 1rem;
-          margin: 0;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -98,8 +119,4 @@
 }
 
 .point-of-sale-button {
-  grid-column: span 3 / span 3;
-  border-radius: 0;
-  height: 50px;
-  background-color: green;
 }

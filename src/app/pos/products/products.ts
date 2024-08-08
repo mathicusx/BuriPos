@@ -1,15 +1,22 @@
-// src/app/products.ts
-
+import * as categories from '../../constants/categoriesOptions';
 export interface Product {
+  id: number;
+  category: string;
   barcode: string;
   price: number;
   name: string;
   description: string;
+  quantity?: number;
+}
+export interface ProductForSale {
+  barcode: string;
+  price: number;
+  quantity: number;
+  name: string;
 }
 
 export interface SaleButtonOptions {
-  name: string | number,
-
+  name: string | number;
 }
 
 export const saleButtonOptions: SaleButtonOptions[] = [
@@ -50,36 +57,121 @@ export const saleButtonOptions: SaleButtonOptions[] = [
 
 export const products: Product[] = [
   {
-    barcode: '1234567890123',
-    price: 29.99,
-    name: 'Product 1',
-    description: 'Description for Product 1',
+    id: 1,
+    category: categories.CATEGORY_VEGETABLES,
+    barcode: '123456',
+    price: 1.99,
+    name: 'Carrot',
+    description: 'Fresh carrot',
   },
   {
-    barcode: '2345678901234',
-    price: 49.99,
-    name: 'Product 2',
-    description: 'Description for Product 2',
+    id: 2,
+    category: categories.CATEGORY_FRUITS,
+    barcode: '2345671',
+    price: 0.99,
+    name: 'Ябълка',
+    description: 'Red apple',
   },
   {
-    barcode: '3456789012345',
-    price: 19.99,
-    name: 'Product 3',
-    description: 'Description for Product 3',
+    id: 2,
+    category: categories.CATEGORY_FRUITS,
+    barcode: '234267',
+    price: 0.99,
+    name: 'Банан',
+    description: 'Red apple',
   },
   {
-    barcode: '4567890123456',
-    price: 99.99,
-    name: 'Product 4',
-    description: 'Description for Product 4',
+    id: 2,
+    category: categories.CATEGORY_FRUITS,
+    barcode: '294567',
+    price: 0.99,
+    name: 'Круша',
+    description: 'Red apple',
+  },
+  {
+    id: 3,
+    category: categories.CATEGORY_DAIRY,
+    barcode: '345678',
+    price: 2.99,
+    name: 'Milk',
+    description: 'Whole milk',
+  },
+  {
+    id: 4,
+    category: categories.CATEGORY_BAKERY,
+    barcode: '456789',
+    price: 3.99,
+    name: 'Bread',
+    description: 'Whole grain bread',
+  },
+  {
+    id: 5,
+    category: categories.CATEGORY_MEAT,
+    barcode: '567890',
+    price: 5.99,
+    name: 'Chicken Breast',
+    description: 'Boneless chicken breast',
+  },
+  {
+    id: 6,
+    category: categories.CATEGORY_SEAFOOD,
+    barcode: '678901',
+    price: 12.99,
+    name: 'Salmon',
+    description: 'Fresh salmon fillet',
+  },
+  {
+    id: 7,
+    category: categories.CATEGORY_BEVERAGES,
+    barcode: '789012',
+    price: 1.49,
+    name: 'Orange Juice',
+    description: 'Fresh orange juice',
+  },
+  {
+    id: 8,
+    category: categories.CATEGORY_SNACKS,
+    barcode: '890123',
+    price: 2.49,
+    name: 'Chips',
+    description: 'Potato chips',
+  },
+  {
+    id: 9,
+    category: categories.CATEGORY_FROZEN,
+    barcode: '901234',
+    price: 4.99,
+    name: 'Ice Cream',
+    description: 'Vanilla ice cream',
+  },
+  {
+    id: 10,
+    category: categories.CATEGORY_PANTRY,
+    barcode: '012345',
+    price: 3.49,
+    name: 'Pasta',
+    description: 'Spaghetti pasta',
+  },
+  {
+    id: 11,
+    category: categories.CATEGORY_HEALTH,
+    barcode: '123789',
+    price: 7.99,
+    name: 'Vitamins',
+    description: 'Multivitamins',
+  },
+  {
+    id: 12,
+    category: categories.CATEGORY_CLEANING,
+    barcode: '234890',
+    price: 2.99,
+    name: 'Dish Soap',
+    description: 'Lemon scented dish soap',
   },
 ];
 
-// src/app/grocery-categories.ts
-
-// src/app/grocery-category.ts
-
 export interface GroceryCategory {
+  category: string;
   id: number;
   name: string;
   description?: string; // Optional description
@@ -90,62 +182,74 @@ export const groceryCategories: GroceryCategory[] = [
     id: 1,
     name: 'Плодове',
     description: 'Fresh fruits including apples, bananas, berries, and more.',
+    category: categories.CATEGORY_FRUITS,
   },
   {
     id: 2,
     name: 'Зеленчуци',
     description:
       'Fresh vegetables including leafy greens, root vegetables, and more.',
+    category: categories.CATEGORY_VEGETABLES,
   },
   {
     id: 3,
     name: 'Мляко',
     description: 'Milk, cheese, yogurt, and other dairy products.',
+    category: categories.CATEGORY_DAIRY,
   },
   {
     id: 4,
     name: 'Хляб',
     description: 'Bread, pastries, and other baked goods.',
+    category: categories.CATEGORY_BAKERY,
   },
   {
     id: 5,
     name: 'Месо',
     description: 'Fresh meat including beef, chicken, pork, and more.',
+    category: categories.CATEGORY_MEAT,
   },
   {
     id: 7,
     name: 'Напитки',
     description: 'Soft drinks, juices, water, and other beverages.',
+    category: categories.CATEGORY_BEVERAGES,
   },
   {
     id: 8,
     name: 'Шоколад',
     description: 'Chips, cookies, candy, and other snack items.',
+    category: categories.CATEGORY_SNACKS,
   },
   {
     id: 9,
     name: 'Пръчки',
     description: 'Frozen meals, vegetables, desserts, and more.',
+    category: categories.CATEGORY_SNACKS,
   },
   {
     id: 10,
     name: 'Макарони',
     description: 'Staples such as pasta, rice, canned goods, and spices.',
+    category: categories.CATEGORY_PANTRY,
   },
   {
     id: 11,
     name: 'Семки',
     description: 'Personal care items, vitamins, and supplements.',
+    category: categories.CATEGORY_PANTRY,
   },
   {
     id: 12,
     name: 'Фъстъци',
     description:
       'Cleaning supplies, paper goods, and other household essentials.',
+    category: categories.CATEGORY_PANTRY,
   },
   {
     id: 13,
     name: 'Чипс',
     description: 'Food, toys, and other supplies for pets.',
+    category: categories.CATEGORY_PANTRY,
   },
 ];
