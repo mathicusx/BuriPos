@@ -88,7 +88,9 @@
     </div>
     <div class="sale-terminal-total-summary">
       <button mat-flat-button class="point-of-sale-button">Плащане</button>
-      <div class="summary-total">За Плащане: {{ totalPrice }}лв.</div>
+      <div class="summary-total">
+        За Плащане: {{ totalPrice.toFixed(2) }}лв.
+      </div>
     </div>
     <div class="sale-terminal-button-container">
       <div

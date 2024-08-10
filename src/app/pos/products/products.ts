@@ -189,6 +189,15 @@ export const products: Product[] = [
     name: 'Dish Soap',
     description: 'Lemon scented dish soap',
   },
+  {
+    id: 13,
+    category: categories.CATEGORY_CLEANING,
+    barcode: '59067207',
+    price: 7.10,
+    costOfGoods: 6.80,
+    name: 'Цигари',
+    description: 'Lemon scented dish soap',
+  },
 ];
 
 
