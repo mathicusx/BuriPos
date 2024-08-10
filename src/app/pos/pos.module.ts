@@ -8,6 +8,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { CategoriesComponent } from './categories/categories.component';
 import { ProductEditorComponent } from './products/product-editor/product-editor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SalesManagmentComponent } from './sales-managment/sales-managment.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductsComponent,
     CategoriesComponent,
     ProductEditorComponent,
+    SalesManagmentComponent,
   ],
   imports: [
     CommonModule,

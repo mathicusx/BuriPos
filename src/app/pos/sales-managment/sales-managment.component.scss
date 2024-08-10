@@ -1,0 +1,28 @@
+.managment-container {
+  padding: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid;
+  .revenue-container {
+    border: 3px solid;
+    border-radius: 1rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background: #ededed;
+
+    &:last-child {
+      background-color: antiquewhite;
+    }
+    .revenue-title {
+      text-align: center;
+    }
+    .revenue {
+      justify-content: space-between;
+      display: flex;
+      gap: 1rem;
+      .revenue-text {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}

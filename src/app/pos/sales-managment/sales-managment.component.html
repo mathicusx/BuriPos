@@ -1,0 +1,34 @@
+<div class="managment-container">
+  <div class="revenue-container">
+    <h2 class="revenue-title">Today's Revenue</h2>
+    <div class="revenue">
+      <h2 class="revenue-text">
+        <strong>Оборот:</strong> {{ todaysRevenue.gross.toFixed(2) }}лв.
+      </h2>
+      <h2 class="revenue-text">
+        <strong>Цена на продукти:</strong>
+        {{ todaysRevenue.costOfGoods.toFixed(2) }}лв.
+      </h2>
+
+      <h2 class="revenue-text">
+        <strong>Печалба:</strong> {{ todaysRevenue.netProfit.toFixed(2) }}лв.
+      </h2>
+    </div>
+  </div>
+  <div class="revenue-container">
+    <h2 class="revenue-title">This Months's Revenue</h2>
+    <div class="revenue">
+      <h2 class="revenue-text">
+        <strong>Оборот:</strong> {{ monthRevenue.gross.toFixed(2) }}лв.
+      </h2>
+      <h2 class="revenue-text">
+        <strong>Цена на продукти:</strong>
+        {{ monthRevenue.costOfGoods.toFixed(2) }}лв.
+      </h2>
+
+      <h2 class="revenue-text">
+        <strong>Печалба:</strong> {{ monthRevenue.netProfit.toFixed(2) }}лв.
+      </h2>
+    </div>
+  </div>
+</div>
