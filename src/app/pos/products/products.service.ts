@@ -1,7 +1,10 @@
 // src/app/product.service.ts
 
-import { Injectable } from '@angular/core'; 
+import { Injectable } from '@angular/core';
 import { Product, products } from './products';
+import { environment } from '../../../environments/environment.development';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +12,10 @@ import { Product, products } from './products';
 export class ProductService {
   private products: Product[] = products;
 
-  getProducts(): Product[] {
-    return this.products;
+  constructor(private readonly _http: HttpClient) {}
+
+  getProducts(): Observable<Product[]> {
+    return this._http.get<Product[]>(`${environment.apiServer}/Product`);
   }
 
   addProduct(product: Product): void {

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductEditorComponent } from './product-editor/product-editor.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Subject, take, takeUntil } from 'rxjs';
+import { ProductService } from './products.service';
 
 @Component({
   selector: 'app-products',
@@ -21,11 +22,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onDestroy = new Subject<boolean>();
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    private productService: ProductService
+  ) {
     console.log(this.products);
   }
 
   ngOnInit(): void {
+    this.productService
+      .getProducts()
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe((res) => console.log(res));
     this.filteredProducts = products;
     this.filterForm.valueChanges
       .pipe(takeUntil(this.onDestroy))
