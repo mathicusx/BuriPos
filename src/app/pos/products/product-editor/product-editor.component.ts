@@ -39,6 +39,7 @@ export class ProductEditorComponent implements OnInit {
       id: new FormControl(product?.id || null), // For editing purposes
       name: new FormControl(product?.name || null),
       price: new FormControl(product?.price || null),
+      costOfGoods: new FormControl(product?.costOfGoods || null),
       barcode: new FormControl(product?.barcode || null),
       quantity: new FormControl(product?.quantity || 1),
       category: new FormControl(product?.category || null),

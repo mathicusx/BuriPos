@@ -3,15 +3,28 @@ import { Product, products } from './products';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductEditorComponent } from './product-editor/product-editor.component';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Subject, take, takeUntil } from 'rxjs';
+import { combineLatest, map, Observable, Subject, take, takeUntil } from 'rxjs';
 import { ProductService } from './products.service';
+import { Store } from '@ngrx/store';
+import {
+  getProducts,
+  selectLoadingProducts,
+  selectProducts,
+} from '../../store/pos/products';
+import { AppState } from '../../store/app/app.reducers';
 
+interface ViewModel {
+  products: Product[];
+  loading: boolean;
+}
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit, OnDestroy {
+  public readonly vm$: Observable<ViewModel>;
+
   products: Product[] = products;
 
   filteredProducts: Product[] = [];
@@ -22,11 +35,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onDestroy = new Subject<boolean>();
 
+  private readonly loading$: Observable<boolean>;
+
+  private readonly products$: Observable<Product[]>;
+
   constructor(
     public dialog: MatDialog,
-    private productService: ProductService
+    private productService: ProductService,
+    private readonly store: Store<AppState>
   ) {
-    console.log(this.products);
+    this.store.dispatch(getProducts());
+    this.loading$ = this.store.select(selectLoadingProducts);
+    this.products$ = this.store.select(selectProducts);
+    this.vm$ = combineLatest([this.products$, this.loading$]).pipe(
+      map(([products, loading]) => ({ products, loading }))
+    );
   }
 
   ngOnInit(): void {

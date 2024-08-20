@@ -9,6 +9,24 @@ export interface Product {
   description: string;
   quantity?: number;
 }
+
+export interface CreateProduct {
+  name: string;
+  category: string;
+  price: number;
+  quantity: number;
+  costOfGoods: number;
+  barcode: string; 
+}
+
+export interface UpdateProduct {
+  name?: string;
+  category?: string;
+  price?: number;
+  quantity?: number;
+  costOfGoods?: number;
+  barcode?: string; 
+}
 export interface ProductForSale {
   barcode: string;
   price: number;

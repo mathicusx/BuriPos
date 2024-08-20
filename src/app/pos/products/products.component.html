@@ -13,8 +13,8 @@
       Добавяне на продукт
     </button>
   </div>
-  <div class="card-container">
-    <mat-card *ngFor="let product of filteredProducts" appearance="outlined">
+  <div class="card-container" *ngIf="vm$ | async as vm">
+    <mat-card *ngFor="let product of vm.products" appearance="outlined">
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title class="card-title">{{ product.name }}</mat-card-title>
