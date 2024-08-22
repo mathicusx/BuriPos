@@ -8,21 +8,16 @@ import { AppState } from '../../app/app.reducers';
 
 @Injectable()
 export class ProductsEffects {
-  constructor(
-    private readonly actions$: Actions,
-    private readonly store: Store<AppState>,
-    private readonly productsService: ProductService
-  ) {}
-
-  getProducts$ = createEffect(() => {
-    return this.actions$.pipe(
+  getProducts$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(
-        ProductActions.getProducts
-        // ProductActions.deleteProduct,
-        // ProductActions.createProduct,
-        // ProductActions.updateProduct
+        ProductActions.getProducts,
+        ProductActions.deleteProduct,
+        ProductActions.createProduct,
+        ProductActions.updateProduct
       ),
       switchMap(() => {
+        console.log('enters switchmap')
         return this.productsService.getProducts().pipe(
           map((_) =>
             ProductActions.getProductsCompleteAction({
@@ -45,6 +40,12 @@ export class ProductsEffects {
           })
         );
       })
-    );
-  });
+    )
+  );
+
+  constructor(
+    private readonly actions$: Actions,
+    private readonly store: Store<AppState>,
+    private readonly productsService: ProductService
+  ) {}
 }

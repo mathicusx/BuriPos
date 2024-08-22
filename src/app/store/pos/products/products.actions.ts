@@ -3,15 +3,15 @@ import { CreateProduct, Product, UpdateProduct } from '../../../pos/products/pro
 
 const PRODUCTS = 'PRODUCTS';
 
-export const getProducts = createAction(`[Page ${PRODUCTS}] get Products`);
+export const getProducts = createAction(`[Page ${PRODUCTS}] get products`);
 
 export const getProductsCompleteAction = createAction(
-  `[Service ${PRODUCTS}] get PRODUCTs complete`,
+  `[Service ${PRODUCTS}] get products complete`,
   props<{ products: Product[] }>()
 );
 
 export const getProductsFailedAction = createAction(
-  `[Service ${PRODUCTS}] get PRODUCTs failed`,
+  `[Service ${PRODUCTS}] get products failed`,
   props<{ errorMessage: string }>()
 );
 
